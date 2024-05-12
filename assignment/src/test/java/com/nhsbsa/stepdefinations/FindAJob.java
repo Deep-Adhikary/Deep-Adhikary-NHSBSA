@@ -16,7 +16,7 @@ public class FindAJob extends BaseStepDefinations {
 
     public FindAJob(Context context) {
         super(context);
-        findAJobActions = new FindAJobActions(driver, wait);
+        findAJobActions = new FindAJobActions(context);
     }
 
     @Given("a job seeker opens NHS jobs website")

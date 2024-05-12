@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.nhsbsa.stepdefinations.Context;
 import com.nhsbsa.utils.ConfigurationManager;
 
 public class Actions {
@@ -24,18 +25,20 @@ public class Actions {
     protected final ConfigurationManager configs;
     protected final String baseUrl;
     private final int defaultPauseTime;
-    private final Path screenShotPath = Paths.get(
-            FileSystems.getDefault().getPath("").toAbsolutePath().toString(),
-            "target", "screenshots");
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_mm_dd_HH_mm_ss_S");
+    private final Path screenShotPath;
+    //  = Paths.get(
+    //         FileSystems.getDefault().getPath("").toAbsolutePath().toString(),
+    //         "target", "screenshots");
+    private final DateTimeFormatter formatter;
 
-    protected Actions(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
+    protected Actions(Context context) {
+        this.driver = context.getDriver();
+        this.wait = context.getWebDriverWait();
         configs = ConfigurationManager.getInstance();
+        formatter=context.getScreenShotFormat();
         baseUrl = configs.getProperty("appBaseUrl");
         defaultPauseTime=Integer.parseInt(configs.getProperty("defaultPauseTime"));
-        createScreenshotDirectory();
+        screenShotPath=context.getScreenShotPath();
 
     }
 
