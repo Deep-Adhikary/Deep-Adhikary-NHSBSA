@@ -31,6 +31,7 @@ public class Context {
                         configs.getProperty("browser"),
                         Boolean.parseBoolean(configs.getProperty("headless")));
         driver.manage().timeouts().implicitlyWait(implicitWaitTime);
+        driver.manage().window().maximize();
         initialized = true;
     }
 

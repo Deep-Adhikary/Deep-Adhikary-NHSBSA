@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.nhsbsa.stepdefinations.Context;
 import com.nhsbsa.utils.ConfigurationManager;
-import com.nhsbsa.utils.DriverManager;
 
 public class BaseStepDefinations {
     protected WebDriver driver;

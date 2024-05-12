@@ -1,7 +1,9 @@
 package com.nhsbsa.base;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,15 +45,22 @@ public class FindAJobElements extends Elements {
     @FindBy(css = "[data-test='search-button']")
     private WebElement searchButton;
 
-    //Search Results Page
+    // Search Results Page
     @FindBy(css = "[data-test='sort-input']")
     private WebElement sortResultSelect;
-   
-    @FindBy(css= "[data-test='search-result']")
+
+    @FindBy(css = "[data-test='search-results-count']")
+    private WebElement searchResultsCount;
+
+    @FindBy(css = "[data-test='search-result']")
     private List<WebElement> searchResults;
 
     @FindBy(xpath = "//*[.='No result found']")
     private WebElement noResultsFoundText;
+
+    @FindBy(css = "summary[data-test='distance']")
+    private WebElement summaryDistance;
+
     public FindAJobElements(WebDriver driver) {
         super(driver);
     }
@@ -68,8 +77,11 @@ public class FindAJobElements extends Elements {
         return wait.until(ExpectedConditions.visibilityOf(whereInput));
     }
 
-    public WebElement getLocationDropDownList() {
-        return wait.until(ExpectedConditions.visibilityOf(locationDropDownList));
+    public WebElement getLocationDropDownItem(String item) {
+        return wait.until(ExpectedConditions.visibilityOf(locationDropDownList))
+                .findElements(By.tagName("li")).stream().filter(element -> {
+                    return element.getText().equalsIgnoreCase(item);
+                }).collect(Collectors.toList()).get(0);
     }
 
     public Select getDistanceDropDown() {
@@ -103,9 +115,19 @@ public class FindAJobElements extends Elements {
     public Select getSortByDropDown() {
         return new Select(wait.until(ExpectedConditions.visibilityOf(sortResultSelect)));
     }
-    public List<WebElement> getSearchResults(){
+
+    public WebElement getSearchResultsCount() {
+        return wait.until(ExpectedConditions.visibilityOf(searchResultsCount));
+    }
+
+    public List<WebElement> getSearchResults() {
         return wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
     }
+
+    public WebElement getSummaryDistance() {
+        return wait.until(ExpectedConditions.visibilityOf(summaryDistance));
+    }
+
     public WebElement getNoResultsFoundText() {
         return noResultsFoundText;
     }
