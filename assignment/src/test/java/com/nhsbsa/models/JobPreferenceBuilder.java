@@ -66,4 +66,12 @@ public class JobPreferenceBuilder {
     public String getPayRange() {
         return payRange;
     }
+
+    @Override
+    public String toString() {
+
+        return String.format(
+                "Keyword: %s | Location: %s | Distance: %s | Reference: %s | Employer: %s | Pay Range: %s ",
+                jobKeyword, jobLocations, jobDistance, jobReference, employer, payRange);
+    }
 }

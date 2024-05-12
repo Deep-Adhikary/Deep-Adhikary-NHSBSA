@@ -1,6 +1,6 @@
 package com.nhsbsa.stepdefinations;
 
-
+import java.util.HashMap;
 import java.util.Map;
 
 import com.nhsbsa.actions.FindAJobActions;
@@ -14,10 +14,9 @@ import io.cucumber.java.en.*;
 public class FindAJob extends BaseStepDefinations {
     private final FindAJobActions findAJobActions;
 
-
     public FindAJob(Context context) {
         super(context);
-        findAJobActions=new FindAJobActions(driver,wait);       
+        findAJobActions = new FindAJobActions(driver, wait);
     }
 
     @Given("a job seeker opens NHS jobs website")
@@ -27,16 +26,19 @@ public class FindAJob extends BaseStepDefinations {
 
     @When("they put their preferences into the search functionality")
     public void applyPreferences(DataTable jobPreference) {
-        Map<String,String> preferenceMap = jobPreference.asMaps(String.class, String.class).get(0);
+        Map<String, String> preferenceMap = new HashMap<>(jobPreference
+                .asMaps(String.class, String.class)
+                .get(0));
+        preferenceMap.replaceAll((key, value) -> value == null ? "" : value);
 
-        JobPreferences preferences=new JobPreferenceBuilder()
-        .jobKeyword(preferenceMap.get("Keyword"))
-        .jobLocations(preferenceMap.get("Location"))
-        .jobDistance(preferenceMap.get("Distance"))
-        .jobReference(preferenceMap.get("Reference"))
-        .employer(preferenceMap.get("Employer"))
-        .payRange(preferenceMap.get("Pay Range"))
-        .build();
+        JobPreferences preferences = new JobPreferenceBuilder()
+                .jobKeyword(preferenceMap.get("Keyword"))
+                .jobLocations(preferenceMap.get("Location"))
+                .jobDistance(preferenceMap.get("Distance"))
+                .jobReference(preferenceMap.get("Reference"))
+                .employer(preferenceMap.get("Employer"))
+                .payRange(preferenceMap.get("Pay Range"))
+                .build();
         findAJobActions.applyPreferences(preferences);
     }
 
@@ -44,15 +46,19 @@ public class FindAJob extends BaseStepDefinations {
     public void performSearch() {
         findAJobActions.performSearch();
     }
-    @Then("they should get list of jobs which matches their preference")
-    public void searchSuccessfulAndResultsReturned(){
-        findAJobActions.valiDateAtlLeastOneSearchResultsReturned();
 
+    @Then("they should get list of jobs which matches their preference")
+    public void searchSuccessfulAndResultsReturned() {
+        findAJobActions.valiDateAtlLeastOneSearchResultsReturned();
     }
+
     @Then("they should able to sort search results with {string}")
-    public void sortData(String sortBy){
-        System.out.println(sortBy);
+    public void sortData(String sortBy) {
+        findAJobActions.sortSearchResult(sortBy);
     }
-   
+    @Then("no job result will be return")
+    public void noResultsReturn(){
+        findAJobActions.verifyNoResultsReturned();
+    }
 
 }

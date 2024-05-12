@@ -23,6 +23,7 @@ public class Actions {
     protected final WebDriverWait wait;
     protected final ConfigurationManager configs;
     protected final String baseUrl;
+    private final int defaultPauseTime;
     private final Path screenShotPath = Paths.get(
             FileSystems.getDefault().getPath("").toAbsolutePath().toString(),
             "target", "screenshots");
@@ -33,6 +34,7 @@ public class Actions {
         this.wait = wait;
         configs = ConfigurationManager.getInstance();
         baseUrl = configs.getProperty("appBaseUrl");
+        defaultPauseTime=Integer.parseInt(configs.getProperty("defaultPauseTime"));
         createScreenshotDirectory();
 
     }
@@ -63,6 +65,17 @@ public class Actions {
     protected void scrollIntoView(WebElement element){
         // Javascript executor
       ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+    protected void pause(){
+        pause(defaultPauseTime);
+    }
+    protected void pause(double timeOutInSecond){
+        try {
+            int st=(int)timeOutInSecond*1000;
+            Thread.sleep(st);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void createScreenshotDirectory() {

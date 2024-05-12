@@ -7,8 +7,9 @@ public class JobPreferences {
     private String jobReference;
     private String employer;
     private String payRange;
-    
-    public JobPreferences(String jobKeyword, String jobLocations, String jobDistance, String jobReference, String employer, String payRange) {
+
+    public JobPreferences(String jobKeyword, String jobLocations, String jobDistance, String jobReference,
+            String employer, String payRange) {
         this.jobKeyword = jobKeyword;
         this.jobLocations = jobLocations;
         this.jobDistance = jobDistance;
@@ -16,7 +17,8 @@ public class JobPreferences {
         this.employer = employer;
         this.payRange = payRange;
     }
-    public JobPreferences(JobPreferenceBuilder builder){
+
+    public JobPreferences(JobPreferenceBuilder builder) {
         this.jobKeyword = builder.getJobKeyword();
         this.jobLocations = builder.getJobLocations();
         this.jobDistance = builder.getJobDistance();
@@ -24,7 +26,7 @@ public class JobPreferences {
         this.employer = builder.getEmployer();
         this.payRange = builder.getPayRange();
     }
-    
+
     public String getJobKeyword() {
         return jobKeyword;
     }
@@ -47,5 +49,13 @@ public class JobPreferences {
 
     public String getPayRange() {
         return payRange;
+    }
+
+    @Override
+    public String toString() {
+
+        return String.format(
+                "Keyword: %s | Location: %s | Distance: %s | Reference: %s | Employer: %s | Pay Range: %s ",
+                jobKeyword, jobLocations, jobDistance, jobReference, employer, payRange);
     }
 }

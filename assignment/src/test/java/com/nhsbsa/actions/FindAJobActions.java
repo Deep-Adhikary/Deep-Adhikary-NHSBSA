@@ -1,6 +1,7 @@
 package com.nhsbsa.actions;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,12 +24,17 @@ public class FindAJobActions extends Actions {
         assertTrue(findAJobElements.getPageHeading().isDisplayed());
         takeScreenShotToFile();
     }
-
+    private void provideLocationPreference(String location){
+        if (location.equals("")) return;
+        findAJobElements.getWhereInput().sendKeys(location);
+        findAJobElements.getLocationDropDownItem(location).click();
+    }
     public void applyPreferences(JobPreferences preferences) {
 
+        scrollIntoView(findAJobElements.getWhatInput());
+
         findAJobElements.getWhatInput().sendKeys(preferences.getJobKeyword());
-        findAJobElements.getWhereInput().sendKeys(preferences.getJobLocations());
-        findAJobElements.getLocationDropDownItem(preferences.getJobLocations()).click();
+        this.provideLocationPreference(preferences.getJobLocations());
 
         selectByTextIfNotEmpty(findAJobElements.getDistanceDropDown(),
                 preferences.getJobDistance(), "visibletext");
@@ -54,6 +60,8 @@ public class FindAJobActions extends Actions {
     public void performSearch() {
         wait.until(ExpectedConditions.elementToBeClickable(findAJobElements.getSearchButton())).click();
         assertTrue(findAJobElements.getSummaryDistance().isDisplayed());
+        scrollIntoView(findAJobElements.getSummaryDistance());
+        pause(0.5);
         takeScreenShotToFile();
     }
 
@@ -62,7 +70,25 @@ public class FindAJobActions extends Actions {
         assertNotEquals(findAJobElements.getSearchResults().size(), 0);
         assertTrue(
             Integer.parseInt(findAJobElements.getSearchResultsCount().getText())>0);
+            scrollIntoView(findAJobElements.getSearchResultsCount());
+        pause(0.5);
         scrollIntoView(findAJobElements.getSearchResults().get(0));
+
         takeScreenShotToFile();
     }
+    public void sortSearchResult(String sortBy){
+        WebElement firstResult=findAJobElements.getSearchResults().get(0);
+        findAJobElements.getSortByDropDown().selectByVisibleText(sortBy);
+        wait.until(ExpectedConditions.stalenessOf(firstResult));
+        firstResult=findAJobElements.getSearchResults().get(0);
+        scrollIntoView(firstResult);
+        pause();
+        takeScreenShotToFile();
+    }
+    public void verifyNoResultsReturned(){
+        scrollIntoView(findAJobElements.getNoResultsFoundText());
+        assertTrue(findAJobElements.getNoResultsFoundText().isDisplayed());
+        takeScreenShotToFile();
+    }
+
 }
