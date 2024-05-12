@@ -1,0 +1,94 @@
+package com.nhsbsa.utils;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class DriverManager {
+    private final Duration implicitWaitTime = Duration.ofSeconds(15);
+    private final Duration explicitWaitTime = Duration.ofSeconds(10);
+
+    private WebDriver driver;
+    private URL gridUrl;
+    private ConfigurationManager configs = ConfigurationManager.getInstance();
+
+    public DriverManager() {
+        try {
+            gridUrl = new URL(configs.getProperty("seleniumRemoteUrl"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void createChromeLocal(boolean isHeadless) {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        if (isHeadless) {
+            chromeOptions.addArguments("--headless=new");
+        }
+        driver = new ChromeDriver(chromeOptions);
+    }
+
+    private void createChromeRemote(boolean isHeadless) {
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        if (isHeadless) {
+            chromeOptions.addArguments("--headless=new");
+        }
+        driver = new RemoteWebDriver(gridUrl, chromeOptions);
+    }
+
+    private void createFirefoxRemote(boolean isHeadless) {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        if (isHeadless) {
+            firefoxOptions.addArguments("--headless");
+        }
+        driver = new RemoteWebDriver(gridUrl, firefoxOptions);
+    }
+
+    public WebDriver getWebDriver() {
+        driver = getWebDriver("chrome:local", false);
+        driver.manage().timeouts().implicitlyWait(implicitWaitTime);
+        return driver;
+    }
+
+    public WebDriver getWebDriver(String browser) {
+        driver = getWebDriver(browser, false);
+        driver.manage().timeouts().implicitlyWait(implicitWaitTime);
+        return driver;
+    }
+
+    public WebDriver getWebDriver(String browser, boolean isHeadless) {
+        if (browser.equalsIgnoreCase("chrome:local")) {
+            createChromeLocal(isHeadless);
+        }
+        if (browser.equalsIgnoreCase("chrome:remote")) {
+            createChromeRemote(isHeadless);
+        }
+        if (browser.equalsIgnoreCase("firefox:remote")) {
+            createFirefoxRemote(isHeadless);
+        }
+
+        driver.manage().timeouts().implicitlyWait(implicitWaitTime);
+        return driver;
+    }
+
+    public WebDriverWait getWebDriverWait() {
+        if (driver == null) {
+            throw new RuntimeException("Webdriver instance not exist.");
+        }
+        return new WebDriverWait(driver, explicitWaitTime);
+    }
+}
