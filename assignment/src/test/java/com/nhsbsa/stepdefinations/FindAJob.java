@@ -3,31 +3,35 @@ package com.nhsbsa.stepdefinations;
 
 import com.nhsbsa.actions.FindAJobActions;
 import com.nhsbsa.base.BaseStepDefinations;
-import com.nhsbsa.utils.DriverManager;
-
 import io.cucumber.java.en.*;
 
 public class FindAJob extends BaseStepDefinations {
     private final FindAJobActions findAJobActions;
-    public FindAJob(DriverManager driverManager) {
-        super(driverManager);
-        findAJobActions=new FindAJobActions(driver,wait);
-        
+    public FindAJob(Context context) {
+        super(context);
+        findAJobActions=new FindAJobActions(driver,wait);       
     }
 
-    @Given("an example scenario")
-    public void anExampleScenario() {
+    @Given("a job seeker opens NHS jobs website")
+    public void navigateToJobSearch() {
         findAJobActions.navigateToJobSearch();
     }
 
-    @When("all step definitions are implemented")
-    public void allStepDefinitionsAreImplemented() {
+    @When("they put their preferences into the search functionality")
+    public void applyPreferences() {
     }
 
-    @Then("the scenario passes")
-    public void theScenarioPasses() {
-        driver.quit();
-       
+    @When("they search jobs")
+    public void performSearch() {
     }
+    @Then("they should get list of jobs which matches their preference")
+    public void searchSuccessfulAndResultsReturned(){
+
+    }
+    @Then("they should able to sort search results with {string}")
+    public void sortData(String sortBy){
+        System.out.println(sortBy);
+    }
+   
 
 }

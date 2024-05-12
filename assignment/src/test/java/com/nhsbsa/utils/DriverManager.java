@@ -16,9 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverManager {
-    private final Duration implicitWaitTime = Duration.ofSeconds(15);
-    private final Duration explicitWaitTime = Duration.ofSeconds(10);
-
+   
     private WebDriver driver;
     private URL gridUrl;
     private ConfigurationManager configs = ConfigurationManager.getInstance();
@@ -60,13 +58,11 @@ public class DriverManager {
 
     public WebDriver getWebDriver() {
         driver = getWebDriver("chrome:local", false);
-        driver.manage().timeouts().implicitlyWait(implicitWaitTime);
         return driver;
     }
 
     public WebDriver getWebDriver(String browser) {
         driver = getWebDriver(browser, false);
-        driver.manage().timeouts().implicitlyWait(implicitWaitTime);
         return driver;
     }
 
@@ -80,15 +76,6 @@ public class DriverManager {
         if (browser.equalsIgnoreCase("firefox:remote")) {
             createFirefoxRemote(isHeadless);
         }
-
-        driver.manage().timeouts().implicitlyWait(implicitWaitTime);
         return driver;
-    }
-
-    public WebDriverWait getWebDriverWait() {
-        if (driver == null) {
-            throw new RuntimeException("Webdriver instance not exist.");
-        }
-        return new WebDriverWait(driver, explicitWaitTime);
     }
 }
