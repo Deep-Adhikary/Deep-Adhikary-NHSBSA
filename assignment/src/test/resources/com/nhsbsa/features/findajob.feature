@@ -7,6 +7,7 @@ Feature: Job seekers should able to search jobs in NHS jobs website
       | <what>  | <where>  | <distance> | <reference> | <employer name> | <salary range> |
     And they search jobs
     Then they should get list of jobs which matches their preference
+
     Examples:
       | preference type        | what                | where  | distance   | reference     | employer name                            | salary range       |
       | No Preference          |                     |        |            |               |                                          |                    |
@@ -25,10 +26,12 @@ Feature: Job seekers should able to search jobs in NHS jobs website
     And they search jobs
     Then no job result will be return
 
-  Scenario:
+  Scenario: Verify jobs are being sorted based on 'Date Posted(newest)
     Given a job seeker opens NHS jobs website
     When they put their preferences into the search functionality
-      | Keyword             | Location | Distance   | Reference | Employer | Pay Range |
-      | Pharmacy Technician | London   | +100 Miles |           |          |           |
+      | Keyword       | Location | Distance | Reference | Employer                       | Pay Range |
+      | Automation QA | London   |          |           | NHS Business Service Authority |           |
     And they search jobs
     And they should able to sort search results with 'Date Posted (newest)'
+
+  Scenario:
