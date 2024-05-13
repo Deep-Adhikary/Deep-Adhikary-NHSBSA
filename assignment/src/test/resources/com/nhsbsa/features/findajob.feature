@@ -1,5 +1,6 @@
 Feature: Job seekers should able to search jobs in NHS jobs website
 
+  @findajob
   Scenario Outline: Job seekers serach jobs with <preference type>
     Given a job seeker opens NHS jobs website
     When they put their preferences into the search functionality
@@ -18,6 +19,7 @@ Feature: Job seekers should able to search jobs in NHS jobs website
       | Only Pay Range         |                     |        |            |               |                                          | £40,000 to £50,000 |
       | All Preference Applied | Pharmacy Technician | London |   +5 Miles | E0365-23-1130 | Ramsay Health Care UK Operations Limited | £20,000 to £30,000 |
 
+  @findajob
   Scenario: Job seekers serach jobs with invalid preference
     Given a job seeker opens NHS jobs website
     When they put their preferences into the search functionality
@@ -26,6 +28,7 @@ Feature: Job seekers should able to search jobs in NHS jobs website
     And they search jobs
     Then no job result will be return
 
+  @findajob
   Scenario: Verify jobs are being sorted based on 'Date Posted(newest)'
     Given a job seeker opens NHS jobs website
     When they put their preferences into the search functionality

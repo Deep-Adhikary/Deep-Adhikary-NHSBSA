@@ -8,6 +8,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
     features = {"src/test/resources/com/nhsbsa/features"}, 
     glue = {"com.nhsbsa.stepdefinations"},
+    tags = "@findajob and not @skipped",
     plugin = {"pretty","html:target/cucumber-reports.html"})
 public class RunCucumberTest extends AbstractTestNGCucumberTests {
     @Override
