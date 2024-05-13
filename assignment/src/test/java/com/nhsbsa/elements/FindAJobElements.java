@@ -145,11 +145,12 @@ public class FindAJobElements extends Elements {
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(datePostedLabels)).stream()
                 .filter(element -> element.isDisplayed()).toList().get(0);
     }
-    public By getSearchResultTitle(){
+
+    public By getSearchResultTitle() {
         return searchResultTitle;
     }
 
-    public WebElement getBackToSearchButton(){
+    public WebElement getBackToSearchButton() {
         return back_button;
     }
 

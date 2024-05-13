@@ -14,16 +14,17 @@ public class Elements {
     private final int timeOuts;
     protected final WebDriverWait wait;
 
-    protected Elements(WebDriver driver){
-        configs=ConfigurationManager.getInstance();
-        timeOuts=Integer.parseInt(configs.getProperty("ajaxElementTimeOut"));
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, timeOuts),this);
-        wait=new WebDriverWait(driver, Duration.ofSeconds(timeOuts));
+    protected Elements(WebDriver driver) {
+        configs = ConfigurationManager.getInstance();
+        timeOuts = Integer.parseInt(configs.getProperty("ajaxElementTimeOut"));
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, timeOuts), this);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(timeOuts));
     }
-    Elements(WebDriver driver,WebDriverWait wait){
-        configs=ConfigurationManager.getInstance();
-        timeOuts=Integer.parseInt(configs.getProperty("ajaxElementTimeOut"));
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, timeOuts),this);
-        this.wait=wait;
+
+    Elements(WebDriver driver, WebDriverWait wait) {
+        configs = ConfigurationManager.getInstance();
+        timeOuts = Integer.parseInt(configs.getProperty("ajaxElementTimeOut"));
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, timeOuts), this);
+        this.wait = wait;
     }
 }

@@ -31,17 +31,19 @@ public class Context {
     private static Path runPath;
     private Path screenShotPath;
     private static DateTimeFormatter screenShotFormat;
+
     @BeforeAll
-    public static void suiteSetup(){
-        PathUtil pathUtil=new PathUtil();
-        runPath=pathUtil.getRunRootDirectory();
-        screenShotFormat=pathUtil.getScreenShotFormat();
+    public static void suiteSetup() {
+        PathUtil pathUtil = new PathUtil();
+        runPath = pathUtil.getRunRootDirectory();
+        screenShotFormat = pathUtil.getScreenShotFormat();
     }
+
     @Before
     public void setup(Scenario scenario) {
         if (initialized)
             return;
-        screenShotPath= new PathUtil().getScreenShotPath(runPath, scenario.getName());
+        screenShotPath = new PathUtil().getScreenShotPath(runPath, scenario.getName());
         DriverManager driverManager = new DriverManager();
         this.driver = driverManager
                 .getWebDriver(
@@ -61,15 +63,17 @@ public class Context {
     public WebDriver getDriver() {
         return driver;
     }
-    public Path getScreenShotPath(){
+
+    public Path getScreenShotPath() {
         return screenShotPath;
     }
-    public DateTimeFormatter getScreenShotFormat(){
+
+    public DateTimeFormatter getScreenShotFormat() {
         return screenShotFormat;
     }
 
     public WebDriverWait getWebDriverWait() {
         return new WebDriverWait(driver, explicitWaitTime);
     }
-    
+
 }

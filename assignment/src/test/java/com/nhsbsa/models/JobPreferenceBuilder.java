@@ -8,7 +8,6 @@ public class JobPreferenceBuilder {
     private String employer = "";
     private String payRange = "";
 
-
     public JobPreferenceBuilder jobKeyword(String jobKeyword) {
         this.jobKeyword = jobKeyword;
         return this;

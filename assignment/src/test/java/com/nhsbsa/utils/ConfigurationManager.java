@@ -8,7 +8,6 @@ public class ConfigurationManager {
     private Properties prop = new Properties();
 
     private ConfigurationManager() {
-        // Private constructor to prevent instantiation from outside
         try (InputStream input = ConfigurationManager.class
                 .getClassLoader()
                 .getResourceAsStream("config.properties")) {

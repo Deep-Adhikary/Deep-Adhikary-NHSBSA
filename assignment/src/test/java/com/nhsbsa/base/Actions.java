@@ -1,7 +1,6 @@
 package com.nhsbsa.base;
 
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,19 +25,16 @@ public class Actions {
     protected final String baseUrl;
     private final int defaultPauseTime;
     private final Path screenShotPath;
-    //  = Paths.get(
-    //         FileSystems.getDefault().getPath("").toAbsolutePath().toString(),
-    //         "target", "screenshots");
     private final DateTimeFormatter formatter;
 
     protected Actions(Context context) {
         this.driver = context.getDriver();
         this.wait = context.getWebDriverWait();
         configs = ConfigurationManager.getInstance();
-        formatter=context.getScreenShotFormat();
+        formatter = context.getScreenShotFormat();
         baseUrl = configs.getProperty("appBaseUrl");
-        defaultPauseTime=Integer.parseInt(configs.getProperty("defaultPauseTime"));
-        screenShotPath=context.getScreenShotPath();
+        defaultPauseTime = Integer.parseInt(configs.getProperty("defaultPauseTime"));
+        screenShotPath = context.getScreenShotPath();
 
     }
 
@@ -64,18 +60,21 @@ public class Actions {
         }
         element.selectByVisibleText(text);
     }
-    protected WebElement scrollIntoView(WebElement element){
+
+    protected WebElement scrollIntoView(WebElement element) {
         // Javascript executor
-      ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
-       return element;
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        return element;
 
     }
-    protected void pause(){
+
+    protected void pause() {
         pause(defaultPauseTime);
     }
-    protected void pause(double timeOutInSecond){
+
+    protected void pause(double timeOutInSecond) {
         try {
-            int st=(int)timeOutInSecond*1000;
+            int st = (int) timeOutInSecond * 1000;
             Thread.sleep(st);
         } catch (InterruptedException e) {
             e.printStackTrace();

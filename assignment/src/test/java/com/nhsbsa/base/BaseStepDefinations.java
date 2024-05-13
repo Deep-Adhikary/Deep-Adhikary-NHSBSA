@@ -10,11 +10,12 @@ public class BaseStepDefinations {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected ConfigurationManager configs;
-    protected BaseStepDefinations(Context context){
-        this.configs=ConfigurationManager.getInstance();
-        this.driver=context
-        .getDriver();
-        this.wait=context.getWebDriverWait();
+
+    protected BaseStepDefinations(Context context) {
+        this.configs = ConfigurationManager.getInstance();
+        this.driver = context
+                .getDriver();
+        this.wait = context.getWebDriverWait();
     }
-    
+
 }
