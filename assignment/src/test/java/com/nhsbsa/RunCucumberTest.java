@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
     features = {"src/test/resources/com/nhsbsa/features"}, 
     glue = {"com.nhsbsa.stepdefinations"},
-    plugin = {"pretty"})
+    plugin = {"pretty","html:target/cucumber-reports.html"})
 public class RunCucumberTest extends AbstractTestNGCucumberTests {
     @Override
     @DataProvider(parallel = true)
