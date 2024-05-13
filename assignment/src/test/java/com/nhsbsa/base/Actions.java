@@ -81,16 +81,4 @@ public class Actions {
             e.printStackTrace();
         }
     }
-
-    // private void createScreenshotDirectory() {
-    //     try {
-    //         if (!Files.isDirectory(screenShotPath)) {
-    //             System.out.println("Creating Directory");
-    //             Files.createDirectory(screenShotPath);
-    //         }
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-
-    // }
 }
