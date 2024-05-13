@@ -26,12 +26,10 @@ Feature: Job seekers should able to search jobs in NHS jobs website
     And they search jobs
     Then no job result will be return
 
-  Scenario: Verify jobs are being sorted based on 'Date Posted(newest)
+  Scenario: Verify jobs are being sorted based on 'Date Posted(newest)'
     Given a job seeker opens NHS jobs website
     When they put their preferences into the search functionality
       | Keyword       | Location | Distance | Reference | Employer                       | Pay Range |
       | Automation QA | London   |          |           | NHS Business Service Authority |           |
     And they search jobs
-    And they should able to sort search results with 'Date Posted (newest)'
-
-  Scenario:
+    Then they should able to sort search results with 'Date Posted (newest)'
