@@ -65,9 +65,11 @@ public class Actions {
         }
         element.selectByVisibleText(text);
     }
-    protected void scrollIntoView(WebElement element){
+    protected WebElement scrollIntoView(WebElement element){
         // Javascript executor
       ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
+       return element;
+
     }
     protected void pause(){
         pause(defaultPauseTime);
