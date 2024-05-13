@@ -50,7 +50,6 @@ public class Actions {
                             screenShotPath.toString(),
                             LocalDateTime.now().format(formatter) + ".png"),
                     screenshotData);
-            System.out.println("Screenshot saved");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,15 +82,15 @@ public class Actions {
         }
     }
 
-    private void createScreenshotDirectory() {
-        try {
-            if (!Files.isDirectory(screenShotPath)) {
-                System.out.println("Creating Directory");
-                Files.createDirectory(screenShotPath);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    // private void createScreenshotDirectory() {
+    //     try {
+    //         if (!Files.isDirectory(screenShotPath)) {
+    //             System.out.println("Creating Directory");
+    //             Files.createDirectory(screenShotPath);
+    //         }
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
 
-    }
+    // }
 }
