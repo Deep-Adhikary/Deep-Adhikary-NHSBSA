@@ -120,6 +120,7 @@ public class FindAJobActions extends Actions {
                     datePostedDateFormat);
             wait.until(ExpectedConditions.elementToBeClickable(findAJobElements.getBackToSearchButton())).click();
             wait.until(ExpectedConditions.visibilityOf(findAJobElements.getSearchResultsCount()));
+            takeScreenShotToFile();
             return date;
         }).collect(Collectors.toList());
 
