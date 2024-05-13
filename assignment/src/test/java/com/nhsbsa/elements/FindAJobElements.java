@@ -1,4 +1,4 @@
-package com.nhsbsa.base;
+package com.nhsbsa.elements;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+
+import com.nhsbsa.base.Elements;
 
 public class FindAJobElements extends Elements {
 
@@ -60,6 +62,13 @@ public class FindAJobElements extends Elements {
 
     @FindBy(css = "summary[data-test='distance']")
     private WebElement summaryDistance;
+
+    @FindBy(id = "back-link")
+    private WebElement back_button;
+
+    // Dynamic/ Child Locator
+    private final By searchResultTitle = By.cssSelector("[data-test='search-result-job-title']");
+    private final By datePostedLabels = By.id("date_posted");
 
     public FindAJobElements(WebDriver driver) {
         super(driver);
@@ -130,6 +139,18 @@ public class FindAJobElements extends Elements {
 
     public WebElement getNoResultsFoundText() {
         return noResultsFoundText;
+    }
+
+    public WebElement getVisibleDatePostedLabel() {
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(datePostedLabels)).stream()
+                .filter(element -> element.isDisplayed()).toList().get(0);
+    }
+    public By getSearchResultTitle(){
+        return searchResultTitle;
+    }
+
+    public WebElement getBackToSearchButton(){
+        return back_button;
     }
 
 }
