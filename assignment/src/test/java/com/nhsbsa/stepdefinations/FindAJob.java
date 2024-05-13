@@ -55,9 +55,11 @@ public class FindAJob extends BaseStepDefinations {
     @Then("they should able to sort search results with {string}")
     public void sortData(String sortBy) {
         findAJobActions.sortSearchResult(sortBy);
+        findAJobActions.verifyDataSortedByDatePostedNewest();
     }
+
     @Then("no job result will be return")
-    public void noResultsReturn(){
+    public void noResultsReturn() {
         findAJobActions.verifyNoResultsReturned();
     }
 
