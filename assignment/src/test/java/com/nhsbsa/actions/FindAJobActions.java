@@ -125,6 +125,7 @@ public class FindAJobActions extends Actions {
         }).collect(Collectors.toList());
 
         Function<List<LocalDate>,Boolean> dateComparator= dateList->Ordering.<LocalDate> natural().reverse().isOrdered(dateList);
+        System.out.println(dates);
         assertTrue(dateComparator.apply(dates));
     }
 
