@@ -152,6 +152,12 @@ ajaxElementTimeOut=10
 defaultPauseTime=1
 ```
 
+****Note:**** If using local selenium server use following command to run it. Make sure `Chrome` and `Firefox` browsers are installed
+
+``` bash
+java -jar /path/to/selenium 4.20.0 jar/file standalone --selenium-manager true
+```
+
 ### Update run configuration in `RunCucumberTest.java` as required
 
 ```java
@@ -172,7 +178,7 @@ public class RunCucumberTest extends AbstractTestNGCucumberTests {
 ### Install framework dependencies and execute tests
 
 ```bash
-mvn install
+mvn install -f assignment/pom.xml
 ```
 
 ## Results
