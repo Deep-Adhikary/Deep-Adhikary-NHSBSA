@@ -178,6 +178,7 @@ public class RunCucumberTest extends AbstractTestNGCucumberTests {
 ### Install framework dependencies and execute tests
 
 ```bash
+cd Deep-Adhikary-NHSBSA/
 mvn install -f assignment/pom.xml
 ```
 
