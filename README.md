@@ -1,11 +1,12 @@
 # Deep-Adhikary-NHSBSA
 
 This repository is for NHSBSA Selenium Assignment.
+
 ## Assignment Details
 
 ### User Story
 
-```
+```txt
 As a jobseeker on NHS Jobs website
 I want to search for a job with my preferences
 So that I can get recently posted job results
@@ -26,7 +27,8 @@ Create a Functional Acceptance automation test suite for the above NHS Jobs Tick
 using `User Centric BDD`, `Java (11+)` &amp; `Selenium`.
 
 ****Use the NHS Jobs Search available below in your tests:****
-https://www.jobs.nhs.uk/candidate/search
+
+<https://www.jobs.nhs.uk/candidate/search>
 
 ### Test Case Coverage
 
@@ -67,14 +69,13 @@ This comprehensive framework ensures robust and maintainable test automation, en
 
 - **Data-Driven Testing**: Utilizes `Scenario Outline` to perform data-driven testing, allowing the execution of the same test scenario with different sets of test data.
 - **Design Patterns**: Implements `Action` and `Object Repository` design patterns for enhanced reusability and maintainability. The `Singleton` design pattern is used to pass properties across the framework, while the `Builder` design pattern is used for effective handling of job preferences.
-- **Dependency Injection**: Uses Dependency Injection with `PicoContainer` to pass driver instances between scenarios, ensuring better management of driver lifecycles.
+- **Dependency Injection**: Uses Dependency Injection with `PicoContainer` to pass driver instances between scenarios, ensuring better management of driver life cycles.
 - **OOP Principles**: Leverages Object-Oriented Programming concepts like `Inheritance` and `Polymorphism` to write effective and clean code.
 - **Synchronization**: Utilizes the `Explicit Wait` object synchronization strategy to reduce test flakiness.
 - **Browser Support**: Supports test execution in both `Chrome` and `Firefox` browsers, in both headed and headless modes.
 - **Remote Execution**: Capable of executing scripts on remote Selenium drivers.
 - **Parallel Execution**: Supports parallel execution to speed up the testing process.
 - **Screenshot Capabilities**: Built-in capabilities to capture screenshots in both sequential and parallel modes of execution. Screenshots are stored in the `target` folder.
-
 
 ### Folder Structure
 
@@ -167,6 +168,7 @@ public class RunCucumberTest extends AbstractTestNGCucumberTests {
     }
 }
 ```
+
 ### Install framework dependencies and execute tests
 
 ```bash
@@ -181,7 +183,7 @@ mvn install
 
 - Screenshots are saved in `target/screenshot folder`.
 
-### Result folder structure
+### `target` folder structure
 
 ``` bash
 assignment/target
